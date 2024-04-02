@@ -24,3 +24,7 @@ Run in the console
 $ cd serverless_function
 $ serverless deploy
 ```
+
+# Usage
+- Copy the URL output from the serverless deploy run
+- Do a post request to the with a text parameter
