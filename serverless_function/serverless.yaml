@@ -1,0 +1,29 @@
+service: classification
+
+params:
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: python3.10
+  region: eu-central-1
+  stage: test
+  memorySize: 1024
+  ecr:
+    scanOnPush: true
+    images:
+      classification-model-lci:
+        path: .
+        file: Dockerfile
+        platform: linux/amd64
+
+functions:
+  download:
+    image: classification-model-lci
+    timeout: 30
+    memorySize: 3008
+    events:
+      - http:
+          cors: false
+          path: classify
+          method: post
+          private: false
